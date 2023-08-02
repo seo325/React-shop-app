@@ -1,7 +1,7 @@
 import React from 'react'
 import styles from './Form.module.scss'
-import {useForm}  from 'react-hook-form'
-const Form = ({title}) => {
+import {  useForm } from 'react-hook-form';
+const Form = ({title ,getDataForm , firebaseError}) => {
 
 
   const {register , handleSubmit, formState: { errors }, reset } =useForm({
@@ -9,6 +9,8 @@ const Form = ({title}) => {
   })
   const onSubmit =({email, password}) =>{
 
+    getDataForm(email ,password) 
+    reset()
     console.log(email, password)
   }
   const userEmail = {
@@ -32,11 +34,11 @@ const Form = ({title}) => {
         {...register("email", userEmail)}
         />
         {errors?.email &&
-      <div>
-      <span className={styles.form_error}>
-        {errors.email.message}
-      </span>
-      </div>
+          <div>
+            <span className={styles.form_error}>
+              {errors.email.message}
+            </span>
+          </div>
         }
       </div>
 
@@ -45,16 +47,20 @@ const Form = ({title}) => {
         type='password'
         placeholder='Password'
         {...register("password", userPassword)}
-
         />
+         {errors?.password &&
+          <div>
+            <span className={styles.form_error}>
+              {errors.password.message}
+            </span>
+          </div>
+        }
       </div>
-      <div>
-      <span className={styles.form_error}></span>
-      </div>
-      <button type="submit">{title}</button>
-      <span className={styles.form_error}></span>
-
-            </form>
+      <button type='submit'>{title}</button>
+      {firebaseError && (
+        <span className={styles.form_error}>{firebaseError}</span>
+      )}
+    </form>
   )
 }
 
