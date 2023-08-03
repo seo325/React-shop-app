@@ -60,7 +60,7 @@ export const cartSlice = createSlice({
             )
             localStorage.setItem('cartProducts',JSON.stringify(state.products))
         },
-        getToPrice:(state) =>{
+        getTotalPrice:(state) =>{
             state.totalPrice =state.products.reduce(
                 (acc, item) => (acc += item.total)
             )
@@ -74,8 +74,9 @@ export const {
     incrementProduct,
     decrementProduct,
     deleteFromCart,
-    getToPrice,
+    getTotalPrice,
     setUserId,
-    removeUserId
+    removeUserId,
+
 } =cartSlice.actions
 export default cartSlice.reducer;
