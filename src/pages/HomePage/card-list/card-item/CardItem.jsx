@@ -1,13 +1,17 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
 import styles from './CardItem.module.scss';
-import { useAppSelector } from '../../../../hooks/redux';
+import { useAppDispatch, useAppSelector } from '../../../../hooks/redux';
+import { addToCart } from '../../../../store/cart/cart.slice';
 
 const CardItem = ({item}) => {
     console.log(item);
     const {products } =useAppSelector(state => state.cartSlice)
     const productMatching =products.some(product =>product.id === item.id);
-
+    const dispatch = useAppDispatch();
+    const addItemToCart =() =>{
+        dispatch(addItemToCart(item))
+    }
   return (
     <li className={styles.card_item}>
       <Link to={`/product/${item.id}`}>
@@ -22,6 +26,7 @@ const CardItem = ({item}) => {
       <div>
         <button 
         disabled ={productMatching}
+        onClick={()=> !productMatching &&addItemToCart()}
         >
             {productMatching ? "장바구니에 담긴 제품" :"장바구니에 담기"}
         </button>
