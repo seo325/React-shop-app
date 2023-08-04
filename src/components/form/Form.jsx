@@ -11,7 +11,7 @@ const Form = ({title ,getDataForm , firebaseError}) => {
 
     getDataForm(email ,password) 
     reset()
-    console.log(email, password)
+    // console.log(email, password)
   }
   const userEmail = {
     required: "필수 필드입니다."

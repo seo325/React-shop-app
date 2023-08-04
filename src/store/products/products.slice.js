@@ -4,7 +4,7 @@ import axios from 'axios'
 export const fetchProducts = createAsyncThunk(
     "products/fetchProducts",
     async (category, thunkAPI) => {
-        console.log(thunkAPI)
+        // console.log(thunkAPI)
         try {
             // const response =await axios.get("https://fakestoreapi.com/products")
             // console.log('2@@@', response)

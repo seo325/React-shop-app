@@ -8,7 +8,7 @@ const categoryTab = ({text, categoryName}) => {
 
    const dispatch =useAppDispatch()
    const category = useAppSelector((state)=> state.categoriesSlice); 
-   console.log(category)
+//    console.log(category)
    const getActiveCategory = () => {
     dispatch(setActiveCategory(categoryName))
 }

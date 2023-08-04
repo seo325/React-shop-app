@@ -1,6 +1,20 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice,createAsyncThunk } from "@reduxjs/toolkit";
+import axios from "axios";
+export const postOrder = createAsyncThunk(
+    "cart/postOrder",
+    async (order, thunkAPI) => {
+        try {
+            await axios.post(
+                "https://64cc90f32eafdcdc8519f554.mockapi.io/orders",
+                order
+            )
 
-
+            thunkAPI.dispatch(sendOrder())
+        } catch (error) {
+            return thunkAPI.rejectWithValue("Error sending order");
+        }
+    }
+)
 const initialState = {
     products:  localStorage.getItem("cartProducts") ?
     JSON.parse(localStorage.getItem("cartProducts")) : [],
@@ -60,23 +74,29 @@ export const cartSlice = createSlice({
             )
             localStorage.setItem('cartProducts',JSON.stringify(state.products))
         },
-        getTotalPrice:(state) =>{
-            state.totalPrice =state.products.reduce(
-                (acc, item) => (acc += item.total)
+        getTotalPrice: (state) => {
+            state.totalPrice = state.products.reduce(
+                (acc, item) => (acc += item.total),
+                0
             )
-        }
 
+        },
+        sendOrder: (state) => {
+            state.products = [];
+            localStorage.setItem("cartProducts", JSON.stringify(state.products));
+        },
 }
 })
 
 export const {
     addToCart,
+    sendOrder,
+    deleteFromCart,
     incrementProduct,
     decrementProduct,
-    deleteFromCart,
     getTotalPrice,
     setUserId,
-    removeUserId,
+    removeUserId
+} = cartSlice.actions;
 
-} =cartSlice.actions
 export default cartSlice.reducer;

@@ -5,7 +5,7 @@ import { useAppDispatch, useAppSelector } from '../../../../hooks/redux';
 import { addToCart } from '../../../../store/cart/cart.slice';
 
 const CardItem = ({item}) => {
-    console.log(item);
+    // console.log(item);
     const {products } =useAppSelector(state => state.cartSlice)
     const productMatching =products.some(product =>product.id === item.id);
     const dispatch = useAppDispatch();
