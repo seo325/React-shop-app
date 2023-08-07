@@ -4,7 +4,6 @@ import { useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux';
 import {createUserWithEmailAndPassword ,getAuth} from 'firebase/auth'
 import app from '../../../firebase'
-// import { setUserId } from '../../../store/cart/cart.slice';
 import { setUser } from '../../../store/user/user.slice';
 import { setUserId } from '../../../store/cart/cart.slice';
 const SignUp = () => {
@@ -13,7 +12,7 @@ const SignUp = () => {
   const auth =getAuth(app);
   const dispatch = useDispatch();
 
-  const handleSignupAndLogin =(email, password) =>{
+  const handleSignupAndLogin =(email:string, password:string) =>{
    
     createUserWithEmailAndPassword(auth , email , password)
     .then(userCredential => {

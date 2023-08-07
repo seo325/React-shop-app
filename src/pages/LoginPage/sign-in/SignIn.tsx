@@ -15,7 +15,7 @@ const SignIn = () => {
   const [firebaseError , setFirebaseError] =useState("")
   const auth =getAuth(app);
   const dispatch = useDispatch()
-  const handleLogin =(email, password) =>{
+  const handleLogin =(email:string, password: string) =>{
     signInWithEmailAndPassword(auth, email, password)
     .then(userCredential =>{
       dispatch(setUser({

@@ -1,13 +1,25 @@
 import React from 'react'
 import styles from './Form.module.scss'
-import {  useForm } from 'react-hook-form';
-const Form = ({title ,getDataForm , firebaseError}) => {
+import {  FieldValues, SubmitHandler, useForm } from 'react-hook-form';
+
+type FormPorps ={
+  title : string,
+  getDataForm: (email :string ,password: string) => void;
+  firebaseError :string
+}
+
+type Inputs ={
+  email : string,
+  password: string
+}
+const Form :FC<FormPorps>= ({title ,getDataForm , firebaseError}) => {
 
 
-  const {register , handleSubmit, formState: { errors }, reset } =useForm({
+
+  const {register , handleSubmit, formState: { errors }, reset } =useForm<Inputs>({
     mode:'onchange'
   })
-  const onSubmit =({email, password}) =>{
+  const onSubmit :SubmitHandler<FieldValues> =({email, password}) =>{
 
     getDataForm(email ,password) 
     reset()
