@@ -3,7 +3,7 @@ import userSlice from "./user/user.slice";
 import categoriesSlice from "./categories/categories.slice";
 import productsSlice from "./products/products.slice";
 import productSlice from './products/product.slice';
-import orderSlice from "./cart/cart.slice";
+import orderSlice from "./order/order.slice";
 import cartSlice from "./cart/cart.slice";
 
 

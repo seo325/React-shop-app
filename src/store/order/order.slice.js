@@ -1,7 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
-
 export const fetchOrder = createAsyncThunk(
     "order/fetchOrder",
     async (userId, thunkAPI) => {
@@ -9,6 +8,8 @@ export const fetchOrder = createAsyncThunk(
             const response = await axios.get(
                 `https://64cc90f32eafdcdc8519f554.mockapi.io/orders?search=${userId}`
             )
+            console.log(response)
+            console.log(response.data)
             return response.data;
         } catch (err) {
             return thunkAPI.rejectWithValue("Error receiving order")
@@ -16,11 +17,13 @@ export const fetchOrder = createAsyncThunk(
     }
 )
 
+
 const initialState = {
     order: [],
     isLoading: false,
     error: ""
 }
+
 export const orderSlice = createSlice({
     name: 'order',
     initialState,
@@ -40,4 +43,5 @@ export const orderSlice = createSlice({
             })
     }
 })
+
 export default orderSlice.reducer;
