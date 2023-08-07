@@ -1,9 +1,13 @@
-import React from 'react'
+import React, { FC } from 'react'
 import { Link } from 'react-router-dom';
 import styles from './OrderItem.module.scss';
+import { IProduct } from '../../../../store/products/products.type';
 
+type OrderItemProps ={
+    order : IProduct
+}
 
-const OrderItem= ({ order }) => {
+const OrderItem :FC<OrderItemProps>= ({ order }) => {
     return (
         <li className={styles.order_item}>
             <Link to={`/product/${order.id}`}>

@@ -1,11 +1,12 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
+import { IOrder } from "./order.type";
 
 export const fetchOrder = createAsyncThunk(
     "order/fetchOrder",
     async (userId, thunkAPI) => {
         try {
-            const response = await axios.get(
+            const response = await axios.get<IOrder[]>(
                 `https://64cc90f32eafdcdc8519f554.mockapi.io/orders?search=${userId}`
             )
             console.log(response)
@@ -17,8 +18,13 @@ export const fetchOrder = createAsyncThunk(
     }
 )
 
+type OrderState = {
+    order: IOrder[];
+    isLoading: boolean;
+    error: string;
+}
 
-const initialState = {
+const initialState : OrderState= {
     order: [],
     isLoading: false,
     error: ""
@@ -39,7 +45,7 @@ export const orderSlice = createSlice({
             })
             .addCase(fetchOrder.rejected, (state, action) => {
                 state.isLoading = false;
-                state.error = action.payload;
+                state.error = action.payload as string;
             })
     }
 })
